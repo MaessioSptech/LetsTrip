@@ -1,0 +1,256 @@
+/* COMEÇO DA ESTRUTA PRINCIPAL DO SITE---------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    height: 100vh;
+}
+body {
+    font-family: 'Ubuntu Mono', monospace;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #1a5c0a;
+}
+/* FINAL DA ESTRUTA PRINCIPAL DO SITE ---------------*/
+
+/* IMAGEM DO BACKGROUND ---------------*/
+.banner-img{
+    display: flex;
+    justify-content: center;
+}
+img.background-img{
+    position: absolute;
+	object-fit: cover;
+    object-position: bottom;
+	width: 100%;
+	height: 60vh;
+	z-index: -1;
+}
+
+
+/* COMEÇO DO HEADER ---------------*/
+header{
+    width: 100%;
+    background-color: rgb(255, 138, 4);
+}
+header .container{
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.192);
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 100%;
+}
+.box-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 80%;
+    padding: 20px;
+}
+.box-header a{
+    text-decoration: none;
+    color: black;
+}
+.navbar ul{
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 30vw;
+    height: 40px;
+}
+.navbar li{
+    
+    display: flex;
+    align-items: center;
+    height: 100%;
+    border-radius: 20px;
+}
+.navbar a{
+    padding: 15px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+.agora{
+    border-radius: 20px;
+    background-color: #1a5c0a;
+}
+.agora a{
+    color: white;
+}
+.navbar li:hover{
+    border-radius: 20px;
+    border: 2px solid #1a5c0a;
+}
+/* FIM DO HEADER ---------------*/
+
+/* COMEÇO DO MAIN ---------------*/
+main{
+    height: auto;
+    width: auto;
+}
+/* Banner */
+.banner {
+    height: fit-content;
+    padding: 70px 0;
+    color: white;
+    background-image: url("../imagens/pexels-pedro-ramos-9447549.jpg");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .banner h2{
+    padding-top: 10px;
+  }
+  
+  .banner .container {
+    height: 400px;
+    font-size: 36px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .tamanho-conteudo { 
+    height: fit-content !important;
+  }
+  
+  .banner p {
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    width: 280px;
+    font-size: 36px;
+  }
+  
+  .banner .container span {
+    font-weight: 800;
+  }
+  
+.footer {
+    background-color: rgb(255, 138, 4);
+    height: 150px;
+    color: #fff;
+    display: flex;
+    font-size: 15px;
+  }
+
+  .card {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  
+  .footer .container {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .footer .container .version {
+    font-size: 12px;
+  }
+.text-pergunta{
+    margin-top: 15vh; 
+    color: rgb(0, 0, 0);   
+    background-color: rgba(255, 255, 255, 0.856);
+}
+.banner-conhecer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height:auto;
+    width: 80vw;
+    margin-top: 30vh; 
+    margin-bottom: 15vh;
+    color: rgb(0, 0, 0);   
+}
+.div-conhecer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    width: 85%;
+    height: 50vh;
+}
+.div-conhecer p{
+    height: 400px;
+}
+.banner-conhecer img{
+    position: relative;
+    width: 100%;
+}
+.caixa{
+    overflow: hidden;
+}
+.caixa img{
+    object-fit: cover;
+    border-radius: 10px;
+    width: 300px;
+    height: 300px;
+    margin: 25px;
+    box-shadow: 5px 5px 15px;
+    cursor: pointer;
+}
+.caixa #quadro_viagem{
+    display: flex;
+    justify-content: center;
+}
+.caixa p{
+    text-align: center;
+}
+.text-caixa{
+    position: relative;
+    object-fit: cover;
+    object-position: top;
+}
+button{
+    border: none;
+    background: none;
+}
+.caixa img:hover{
+    object-fit: cover;
+    border-radius: 10px;
+    width: 315px;
+    height: 315px;
+    margin: 17px;
+    box-shadow: 5px 5px 15px;
+    cursor: pointer;
+}
+.banner-slides{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    object-fit: cover;
+    object-position: top;
+    padding-top: 30px;
+    
+}
+.escolha-dest{
+    color: white;
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 30px;
+}
+.img-carrosel{
+    position: absolute;
+	object-fit: cover;
+    object-position: bottom;
+	width: 100%;
+	height: 42vh;
+	z-index: -1;
+    opacity: 0.7;
+}
