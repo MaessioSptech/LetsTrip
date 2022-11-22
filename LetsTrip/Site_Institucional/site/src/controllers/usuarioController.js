@@ -94,8 +94,39 @@ function cadastrar(req, res) {
     }
 }
 
+function trocarFavorito(req, res) {
+    var viagem = req.body.viagemServer; 
+    var idUsuario = req.body.idUsuarioServer;
+    
+    // Faça as validações dos valores
+    if (viagem == undefined) {
+        res.status(400).send("Sua viagem está undefined!");
+    } else if (idUsuario == undefined) {
+        res.status(400).send("Seu usuário está undefined!");
+    } else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.trocarFavorito(viagem, idUsuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar a troca do lugar favorito! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     entrar,
+    trocarFavorito,
     cadastrar,
     listar,
     testar

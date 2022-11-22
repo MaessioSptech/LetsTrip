@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/funcoes.js"></script>
 </head>
 
 <body>
@@ -44,6 +45,9 @@
 </html>
 
 <script>
+    var idUsuario = sessionStorage.ID_USUARIO;
+        alert(idUsuario)
+
     // Galeria de imagens
     var list_viagem = [
         destino = { nome: 'Holambra', img: './imagens/pelourinho_bahia_zarpo.jpg' },
@@ -58,13 +62,13 @@
         destino = { nome: 'Serra Negra', img: './imagens/pelourinho_bahia_zarpo.jpg' }];
 
     for (var dest = 0; dest < list_viagem.length; dest++) {
-        quadro_viagem.innerHTML += `<div><img onclick="publicar('${list_viagem[dest].nome}')" src='${list_viagem[dest].img}'><d class='text-caixa'>${list_viagem[dest].nome} </p></div>`
+        quadro_viagem.innerHTML += `<div><img onclick="verificarUser('${list_viagem[dest].nome}')" src='${list_viagem[dest].img}'><d class='text-caixa'>${list_viagem[dest].nome} </p></div>`
     }
 
     function publicar(viagem) {
         var idUsuario = sessionStorage.ID_USUARIO;
-
-        var corpo = {
+        
+            var corpo = {
             titulo: viagem
         }
 
@@ -96,77 +100,13 @@
         });
 
         return false;
-
-    }
-
-    //atualizarFeed()
-    function atualizarFeed() {
-        //aguardar();
-        fetch("/avisos/listar").then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
-                }
-
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-                    var feed = document.getElementById("feed_container");
-                    feed.innerHTML = "";
-                    for (let i = 0; i < resposta.length; i++) {
-                        var publicacao = resposta[i];
-
-                        spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-                        btnEditar.innerHTML = "Editar";
-                        btnDeletar.innerHTML = "Deletar";
-
-                        divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idAviso;
-                        spanNome.className = "publicacao-nome";
-                        spanTitulo.className = "publicacao-titulo";
-                        divDescricao.className = "publicacao-descricao";
-
-                        divButtons.className = "div-buttons"
-
-                        btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idAviso;
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
-
-                        btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idAviso;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
-
-                        divPublicacao.appendChild(spanID);
-                        divPublicacao.appendChild(spanNome);
-                        divPublicacao.appendChild(spanTitulo);
-                        divPublicacao.appendChild(divDescricao);
-                        divPublicacao.appendChild(divButtons);
-                        divButtons.appendChild(btnEditar);
-                        divButtons.appendChild(btnDeletar);
-                        feed.appendChild(divPublicacao);
-                    }
+        } 
 
 
-                });
-            } else {
-                throw ('Houve um erro na API!');
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-
-        });
-    }
-
-    function verificarUser() {
+    function verificarUser(viagem) {
         var idUsuario = sessionStorage.ID_USUARIO;
-
+        var user_repetido = false
+        
         fetch("/avisos/consultar").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
@@ -181,12 +121,22 @@
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
                     for (let i = 0; i < resposta.length; i++) {
-                        var publicacao = resposta[i];
+                         list_user_favoritos = resposta[i];
 
+                         if(list_user_favoritos.fk_usuario == idUsuario){
+                            var user_repetido = true
+                         }
+                    }
 
+                    if(user_repetido){
+                        // Configurar uma box com a opcao de manter ou trocar seu lugar favorito
+                        trocarFavorito(viagem, idUsuario)
+                    } else{
+                        publicar(viagem)
                     }
 
                 });
+                //
             } else {
                 throw ('Houve um erro na API!');
             }
@@ -196,6 +146,45 @@
         });
     }
 
+    function trocarFavorito(viagem, idUsuario){
+        var viagemVar = viagem;
+        var idUsuarioVar = idUsuario;
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/trocarFavorito", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                viagemServer: viagemVar,
+                idUsuarioServer: idUsuarioVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block";
+
+                mensagem_erro.innerHTML = "Troca de lugar favorito concluido!";
+
+                setTimeout(() => {
+                    window.location = "./grafico.html";
+                }, "2000")
+                
+                limparFormulario();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+    }
 </script>
 
 <script>
