@@ -1,28 +1,232 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <header>
         <div class="container">
             <div class="box-header">
-            <div>
-                <h1><a href="./index.html">Let's Trip</a></h1>
-            </div>
-            <div class="navbar">
-                <ul>
-                    <li class="agora"><a href="./viagem_aleatoria.html">Viagem Aleatória</a></li>
-                    <li><a href="./login.html">Login</a></li>
-                    <li><a href="./cadastro.html">Cadastre-se</a></li>
-                </ul>
-            </div>
+                <div>
+                    <h1><a href="./index.html">Let's Trip</a></h1>
+                </div>
+                <div class="navbar">
+                    <ul>
+                        <li class="agora"><a href="./viagem_aleatoria.html">Viagem Aleatória</a></li>
+                        <li><a href="./login.html">Login</a></li>
+                        <li><a href="./cadastro.html">Cadastre-se</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
+
+    <main>
+        <div>
+            <canvas id="myChart" style="position: relative; height: 40vh; width: 40vw;"></canvas>
+        </div>
+
+        <div>
+            <h1 onclick="verificarUser()">Verificar Usuario</h1>
+        </div>
+
+        <div id="quadro_viagem" class="banner-slides caixa"></div>
+    </main>
 </body>
+
 </html>
+
+<script>
+    // Galeria de imagens
+    var list_viagem = [
+        destino = { nome: 'Holambra', img: './imagens/pelourinho_bahia_zarpo.jpg' },
+        destino = { nome: 'São Roque', img: './imagens/pelourinho_bahia_zarpo.jpg' },
+        destino = { nome: 'Ilha bela', img: './imagens/pelourinho_bahia_zarpo.jpg' },
+        destino = { nome: 'Joanópolis', img: './imagens/pelourinho_bahia_zarpo.jpg' },
+        destino = { nome: 'Campos do Jordão', img: './imagens/pelourinho_bahia_zarpo.jpg' },
+        destino = { nome: 'Águas de São Pedro', img: './imagens/pelourinho_bahia_zarpo.jpg' },
+        destino = { nome: 'Parati', img: './imagens/pelourinho_bahia_zarpo.jpg' },
+        destino = { nome: 'Extrema', img: './imagens/pelourinho_bahia_zarpo.jpg' },
+        destino = { nome: 'Águas de Lindoia', img: './imagens/pelourinho_bahia_zarpo.jpg' },
+        destino = { nome: 'Serra Negra', img: './imagens/pelourinho_bahia_zarpo.jpg' }];
+
+    for (var dest = 0; dest < list_viagem.length; dest++) {
+        quadro_viagem.innerHTML += `<div><img onclick="publicar('${list_viagem[dest].nome}')" src='${list_viagem[dest].img}'><d class='text-caixa'>${list_viagem[dest].nome} </p></div>`
+    }
+
+    function publicar(viagem) {
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        var corpo = {
+            titulo: viagem
+        }
+
+        fetch(`/avisos/publicar/${idUsuario}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo)
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                //CONFIGURAR UMA BOX AVISANDO DO POST SUCESSO
+                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+
+                //CONFIGURAR UM SET TIME OUT PARA TROCAR DE PAGINA
+                window.location = "./grafico.html";
+                limparFormulario();
+                finalizarAguardar();
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+
+    }
+
+    //atualizarFeed()
+    function atualizarFeed() {
+        //aguardar();
+        fetch("/avisos/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("feed_container");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
+                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
+                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+                        btnEditar.innerHTML = "Editar";
+                        btnDeletar.innerHTML = "Deletar";
+
+                        divPublicacao.className = "publicacao";
+                        spanTitulo.id = "inputNumero" + publicacao.idAviso;
+                        spanNome.className = "publicacao-nome";
+                        spanTitulo.className = "publicacao-titulo";
+                        divDescricao.className = "publicacao-descricao";
+
+                        divButtons.className = "div-buttons"
+
+                        btnEditar.className = "publicacao-btn-editar"
+                        btnEditar.id = "btnEditar" + publicacao.idAviso;
+                        btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
+
+                        btnDeletar.className = "publicacao-btn-editar"
+                        btnDeletar.id = "btnDeletar" + publicacao.idAviso;
+                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
+
+                        divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(spanNome);
+                        divPublicacao.appendChild(spanTitulo);
+                        divPublicacao.appendChild(divDescricao);
+                        divPublicacao.appendChild(divButtons);
+                        divButtons.appendChild(btnEditar);
+                        divButtons.appendChild(btnDeletar);
+                        feed.appendChild(divPublicacao);
+                    }
+
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+    function verificarUser() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch("/avisos/consultar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+
+                    }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
+    }
+
+</script>
+
+<script>
+    const labels1 = [
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+    ];
+
+    const data1 = {
+        labels: labels1,
+        datasets: [{
+            label: 'Temperatura',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [30, 29, 28, 25, 22, 23],
+        }]
+    };
+
+    const config1 = {
+        type: 'line',
+        data: data1,
+        options: {}
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config1
+    );
+
+</script>
