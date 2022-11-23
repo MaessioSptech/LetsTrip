@@ -1,5 +1,5 @@
-create database letstrip;
-use letstrip;
+CREATE DATABASE letstrip;
+USE letstrip;
 
 
 CREATE TABLE viagem(
@@ -12,20 +12,57 @@ CREATE TABLE usuario (
 	nome VARCHAR(50),
 	email VARCHAR(50),
 	senha VARCHAR(50),
-	fkViagem int,
+	fkViagem INT,
 	FOREIGN key (fkViagem) REFERENCES favoritos(idFavoritos)
 );
 
 CREATE TABLE comentarioSite (
-   idComentario INT PRIMARY key AUTO_INCREMENT,
-   voto int,
+   idComentario INT,
+   voto INT,
    comentario VARCHAR(150),
+   fkUsuario INT,
+   FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
+   PRIMARY KEY (idComentario, fkUsuario),
    CONSTRAINT chkVoto CHECK (voto = 0 OR voto = 1 OR voto = 2 OR voto = 3 OR voto = 4 OR voto = 5)
 );
 
-select * from usuario;
-select * from favoritos;
-select * from comentarioSite;
+SELECT * FROM usuario;
+SELECT * FROM favoritos;
+SELECT * FROM comentarioSite;
+
+INSERT INTO viagem (nome_viagem) VALUES
+	(''),
+    (''),
+    (''),
+    (''),
+    (''),
+    (''),
+    (''),
+    (''),
+    (''),
+    ('');
+
+INSERT INTO usuario (nome, email, senha) VALUES
+	('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
+    ('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
+    ('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
+    ('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
+    ('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
+    ('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
+    ('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
+    ('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
+    ('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
+    ('Maessio Sousa', 'maessiosousa@sptech.com', '12345678');
+
+
+INSERT INTO comentarioSite VALUES 
+		( , , '', ),
+      ( , , '', ),
+      ( , , '', ),
+      ( , , '', ),
+      ( , , '', ),
+      ( , , '', ),
+      ( , , '', );
 
 SELECT f.id AS idFavoritos,
             f.viagem_favorita,
