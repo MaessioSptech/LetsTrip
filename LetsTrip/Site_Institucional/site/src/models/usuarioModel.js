@@ -37,7 +37,7 @@ function trocarFavorito(viagem, idUsuario) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        UPDATE usuario SET fkViagem = (SELECT idViagem FROM viagem WHERE nome_viagem = ${viagem}) WHERE idUsuario = ${idUsuario};
+        UPDATE usuario SET fkViagem = (SELECT id FROM viagem WHERE nome_viagem = '${viagem}') WHERE id = ${idUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

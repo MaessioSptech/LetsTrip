@@ -13,7 +13,7 @@ CREATE TABLE usuario (
 	email VARCHAR(50),
 	senha VARCHAR(50),
 	fkViagem INT,
-	FOREIGN key (fkViagem) REFERENCES favoritos(idFavoritos)
+	FOREIGN key (fkViagem) REFERENCES viagem(idViagem)
 );
 
 CREATE TABLE comentarioSite (

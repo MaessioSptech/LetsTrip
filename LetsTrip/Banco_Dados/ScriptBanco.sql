@@ -32,3 +32,7 @@ SELECT f.id AS idFavoritos,
 SELECT count(f.viagem_favorita) as qtd, f.viagem_favorita FROM favoritos f
              JOIN usuario u
                 ON f.fk_usuario = u.id group by f.viagem_favorita;
+                
+select fk_usuario from favoritos;
+
+update favoritos set viagem_favorita = 'extrema' where fk_usuario = 2;
