@@ -102,11 +102,12 @@ function fecharModal() {
                     if(user_repetido){
                         // Configurar uma box com a a frase 'Certeza que quer alterar seu lugar favorito'
                         // se 'SIM' faca
+                        alert('Voce já tem uma viagem favorita')
                         trocarFavorito(viagem, idUsuario)
                         // Se 'NAO' exiba mensagem de OK
 
                     } else{
-                        publicar(viagem)
+                        trocarFavorito(viagem, idUsuario)
                     }
 
                 });
