@@ -72,8 +72,9 @@ function fecharModal() {
         for (var dest = 0; dest < list_viagem.length; dest++) {
             quadro_viagem.innerHTML += `<div><img onclick="verificarUser('${list_viagem[dest].nome}')" src='${list_viagem[dest].img}'><d class='text-caixa'>${list_viagem[dest].nome} </p></div>`
         };
-    }
+    };
     
+    // Verificar se usuario ja tem viagem favorita
     function verificarUser(viagem) {
         var idUsuario = sessionStorage.ID_USUARIO;
         var user_repetido = false
@@ -121,6 +122,7 @@ function fecharModal() {
         });
     };
 
+    // Adicionar viagem ao BD
     function publicar(viagem) {
         var idUsuario = sessionStorage.ID_USUARIO;
         
