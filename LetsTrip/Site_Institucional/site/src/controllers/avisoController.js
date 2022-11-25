@@ -20,7 +20,8 @@ function listar(req, res) {
 }
 
 function consultar(req, res) {
-    avisoModel.consultar().then(function (resultado) {
+    var idUsuario = req.params.idUsuario;
+    avisoModel.consultar(idUsuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

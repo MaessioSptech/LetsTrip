@@ -11,7 +11,7 @@ router.get("/listar", function (req, res) {
     avisoController.listar(req, res);
 });
 
-router.get("/consultar", function (req, res) {
+router.get("/consultar/:idUsuario", function (req, res) {
     avisoController.consultar(req, res);
 });
 
