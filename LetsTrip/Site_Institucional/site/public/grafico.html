@@ -30,12 +30,12 @@
     </header>
 
     <main>
-        <div>
-            <canvas id="myChart" style="position: relative; height: 40vh; width: 40vw;"></canvas>
+        <div id='banner_chart' class="banner_grafico">
+            <canvas id="myChart"></canvas>
         </div>
 
         <div>
-            <h1 onclick="verificarUser()">Verificar Usuario</h1>
+            <h1 onclick="atualizarGrafico()">Atualizar Grafico</h1>
         </div>
 
         <div id="quadro_viagem" class="banner-slides caixa"></div>
@@ -51,36 +51,9 @@
 </html>
 
 <script>
-    exibirGaleria();
+    exibirGaleria(list_viagem);
 
-    const labels1 = [
-        '12:00',
-        '13:00',
-        '14:00',
-        '15:00',
-        '16:00',
-        '17:00',
-    ];
+    let proximaAtualizacao;
 
-    const data1 = {
-        labels: labels1,
-        datasets: [{
-            label: 'Temperatura',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [30, 29, 28, 25, 22, 23],
-        }]
-    };
-
-    const config1 = {
-        type: 'line',
-        data: data1,
-        options: {}
-    };
-
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config1
-    );
-
+    obterDadosGrafico(list_viagem)
 </script>

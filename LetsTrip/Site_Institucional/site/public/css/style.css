@@ -283,3 +283,16 @@ button{
     position: relative;
     
 }
+
+/* Grafico */
+.banner_grafico{
+    display: flex;
+    justify-content: center;
+    background-color: #F0F2f5;
+    padding: 0 50px;
+    padding-top: 30px;
+    margin: 50px auto;
+    border-radius: 10px;
+    width: 1300px;
+    height: 700px;
+}

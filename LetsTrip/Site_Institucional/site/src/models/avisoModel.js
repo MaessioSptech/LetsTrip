@@ -3,10 +3,10 @@ var database = require("../database/config");
 function listar() {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-            SELECT v.nome_viagem, count(u.fkViagem) 
+            SELECT v.nome_viagem, count(u.fkViagem) AS qtd_viagem
                 FROM usuario u JOIN viagem v ON u.fkViagem = v.id 
                     WHERE u.fkViagem IS NOT NULL 
-                        GROUP BY u.fkViagem;
+                        GROUP BY u.fkViagem order by v.nome_viagem;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
