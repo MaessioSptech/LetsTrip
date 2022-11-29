@@ -91,14 +91,14 @@ function exibirModal(viagem, imagem, descricao) {
     banner_modal.innerHTML = `
             <div class="modal-overlay active">
                 <div class="modal">
-                    <div  class='quadro_desc'>
+                    <div class='quadro_desc'>
                         <div> 
-                            <img src='${imagem}' style="width: 800px; height: 600px;">
+                            <img src='${imagem}'>
                         </div>
 
-                        <div id='modalBanner'>
+                        <div id='modalBanner' style="width: 100%; height: 100%;">
                             <h2>${viagem}</h2>
-                            <p style="width: 800px; margin: 25px 0"'> ${descricao} </p>
+                            <p style="100%; margin: 25px 0; font-size: 19px"> ${descricao} </p>
                             <div class="div_button">
                                 <button class="btnAceitar" onclick="verificarUser('${viagem}')">Favoritar</button><br>
                                 <button class="btnCancelar" onclick='Modal.close()'>Cancelar</button>
@@ -112,14 +112,20 @@ function exibirModal(viagem, imagem, descricao) {
 };
 function exibirCaixaModal(viagem, idUsuario) {
     modalBanner.innerHTML = '';
-    caixa_modal.innerHTML = `
-            <h2>Você já tem uma viagem favorita</h2>
-            <p>Tem certeza que quer trocar?</p>
+    modalBanner.innerHTML = `
+            <div class='quadro_desc'>
 
-            <div class="div_button">
-                <button class="btnAceitar" onclick="trocarFavorito('${viagem}', '${idUsuario}')">Sim, tenho certeza!</button>
-                <button class="btnCancelar" onclick='Modal.close()'>Cancelar</button>
+                <div id='modalBanner' style="width: 100%; height: 100%;">
+                    <h2>Você já tem uma viagem favorita</h2>
+                    <p>Tem certeza que quer trocar?</p>
+            
+                    <div class="div_button">
+                        <button class="btnAceitar" onclick="trocarFavorito('${viagem}', '${idUsuario}')">Sim, tenho certeza!</button>
+                        <button class="btnCancelar" onclick='Modal.close()'>Cancelar</button>
+                    </div>
+                </div>
             </div>
+            
         `
 }
 var verificador = 0
@@ -138,11 +144,7 @@ function ModalAviso(rank, verificador, viagemUsuario) {
                     <div class="modal">
                         <div  class='quadro_desc'>
                             <div> 
-                                <img src='${src_img}' style="width: 800px; height: 600px;">
-                            </div>
-
-                            <div id='modalBanner'>
-                                <h2>${viagemUsuario}</h2>
+                                <img src='${src_img}'>
                             </div>
                                 <div id="caixa_modal"></div>
                         </div>
@@ -151,7 +153,7 @@ function ModalAviso(rank, verificador, viagemUsuario) {
                 `
             caixa_modal.innerHTML = `
             <h2>Que legal!</h2>
-            <p>Você escolheu umas das três viagens <b>mais</b> favoritadas do site. <br>
+            <p style="margin-left: 30px">Você escolheu umas das três viagens <b>mais</b> favoritadas do site. <br>
             Parece que muita gente recomenda viajar para <b>${viagemUsuario}</b>.</p>
 
             <div class="div_button">
@@ -164,24 +166,20 @@ function ModalAviso(rank, verificador, viagemUsuario) {
                     <div class="modal">
                         <div  class='quadro_desc'>
                             <div> 
-                                <img src='${src_img}' style="width: 800px; height: 600px;">
+                                <img src='${src_img}'>
                             </div>
-
-                            <div id='modalBanner'>
-                                <h2>${viagemUsuario}</h2>
-                            </div>
-                                <div id="caixa_modal"></div>
+                            <div id="caixa_modal"></div>
                         </div>
                     </div>
                 </div>
                 `
             caixa_modal.innerHTML = `
             <h2>Bacana</h2>
-            <p>Você escolheu umas das três viagens <b>menos</b> populares do site. <br>
+            <p style="margin-left: 30px">Você escolheu umas das três viagens <b>menos</b> populares do site. <br>
             Com certeza <b>${viagemUsuario}</b> é um bom destino, mas não é o preferido dos turista.</p>
 
             <div class="div_button">
-                <button class="btnCancelar" onclick='Modal.close()'>Poxa, entendi!</button>
+                <button class="btnCancelar" onclick='Modal.close()'>Saquei!</button>
             </div>
         `
         }
@@ -497,10 +495,11 @@ function atualizarGrafico(dados, myChart) {
 
                 console.log('LISTA DOS RANKINGS - ORDENADOS')
                 console.log(list_ranking)
+                var index = 0
 
                 for (var j = 0; j < list_ranking.length; j++) {
                     if (list_ranking[j].nome == viagemUsuario) {
-                        var index = j
+                        index = j
                     }
                 }
 
@@ -508,7 +507,7 @@ function atualizarGrafico(dados, myChart) {
                 console.log(viagemUsuario)
 
                 console.log('Index dessa viagem na lista')
-                console.log(index + 1)
+                console.log(index)
                 if (index <= 2) {
                     rank = false // Nos 3 MENOS votados
                 } else if (index > list_viagem.length - 4) {
