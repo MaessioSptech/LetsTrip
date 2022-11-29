@@ -16,7 +16,7 @@
         <div class="container">
             <div class="box-header">
             <div>
-                <h1><a href="./index.html">Let's Trip</a></h1>
+                <h1><a href="./index.html"><img src="./imagens/Let's Trip.png" alt="" style="width: 200px;"></a></h1>
             </div>
             <div class="navbar">
                 <ul>
@@ -30,6 +30,30 @@
     </header>
 
     <main>
+        <div class="banner ">
+            <div class="alerta_erro">
+                <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
+                </div>
+            </div>
+            <div class="container tamanho-conteudo">
+                <div class="card medio">
+                    <h2 style="text-align: center;">Dê sua opnião <br> sobre
+                    o site</h2>
+                    <div class="formulario">
+                        <textarea id="comentario_input" cols="30" rows="5" placeholder="Seu cometário"></textarea>
+    
+                        <button class="btnComentario" onclick="cadastrarComentario()">Cadastrar Comentário</button>
+    
+                    </div>
+    
+                    <div id="div_erros_login">
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </main>
 
@@ -43,21 +67,17 @@
 </html>
 
 <script>
-    function cadastrar() {
-        aguardar();
-
+    function cadastrarComentario() {
+        
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
-        var nomeVar = nome_input.value;
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
-        var confirmacaoSenhaVar = confirmacao_senha_input.value;
+        var comentarioVar = comentario_input.value;
+        var idUsuarioVar = sessionStorage.ID_USUARIO;
 
-        if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+        if (comentarioVar == "" || idUsuarioVar == '') {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
-            finalizarAguardar();
             return false;
         }
         else {
@@ -65,7 +85,7 @@
         }
 
         // Enviando o valor da nova input
-        fetch("/usuarios/cadastrar", {
+        fetch("/usuarios/cadastrarComentario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -73,9 +93,8 @@
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar
+                comentarioServer: comentarioVar,
+                idUsuarioServer: idUsuarioVar
             })
         }).then(function (resposta) {
 
@@ -87,7 +106,7 @@
                 mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
                 setTimeout(() => {
-                    window.location = "login.html";
+                    window.location = "./index.html";
                 }, "2000")
                 
                 limparFormulario();
@@ -97,7 +116,6 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
         });
 
         return false;

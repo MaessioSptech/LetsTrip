@@ -1,3 +1,10 @@
+// footer
+function dimensaoTela(){
+    var heightTela = window.innerHeight;
+
+    document.getElementById('pag_processos').style.minHeight = heightTela+'px';
+}
+
 // sessão
 function validarSessao() {
     // aguardar();
@@ -57,7 +64,7 @@ function fecharModal() {
 
 // Galeria de imagens
 const list_viagem = [
-    destino = { nome: 'Águas de Lindoia', img: './imagens/aguas_de_Lindoia.jpg', descricao: 'Em Águas de Lindóia, a Capital Termal do Brasil, você irá reconhecer na simplicidade e na espontaneidade das pessoas um dos maiores valores deste balneário que está tão próximo da Capital de São Paulo e tão distante do stress dos grandes centros urbanos.' },
+    destino = { nome: 'Águas de Lindóia', img: './imagens/aguas_de_Lindoia.jpg', descricao: 'Em Águas de Lindóia, a Capital Termal do Brasil, você irá reconhecer na simplicidade e na espontaneidade das pessoas um dos maiores valores deste balneário que está tão próximo da Capital de São Paulo e tão distante do estresse dos grandes centros urbanos.' },
     destino = { nome: 'Águas de São Pedro', img: './imagens/aguas_de_sao_pedro.jpg', descricao: 'A cidade é conhecida pelas suas águas hidrominerais de valor medicinal, tendo suas fontes naturais com alguns dos principais atrativos turísticos. Possui ainda dois grandes parques (Dr. Octavio Moura Andrade Parque Municipal e o Parque das Águas).' },
     destino = { nome: 'Campos do Jordão', img: './imagens/campos_do_jordao.jpg', descricao: 'Quando se pensa em viajar para um lugar friozinho e romântico, Campos do Jordão é uma das primeiras cidades que vêm à mente. Não é para menos: além das temperaturas baixas, o destino possui ótima infraestrutura e diversas atrações, seja para uma viagem a dois, em família ou com os amigos.' },
     destino = { nome: 'Extrema', img: './imagens/extrema.jpg', descricao: 'O encontro, a prosa e a hospitalidade fazem parte do cotidiano da nossa gente que nasceu e cresceu convivendo com a natureza. Dentre tantas experiências, nessa região acolhedora, você encontra a adrenalina para renovar o ânimo e, ao mesmo tempo, a paz orquestrada pelo silêncio das montanhas e o canto das águas da floresta para reposicionar o espírito.' },
@@ -106,7 +113,7 @@ function exibirModal(viagem, imagem, descricao) {
 function exibirCaixaModal(viagem, idUsuario) {
     modalBanner.innerHTML = '';
     caixa_modal.innerHTML = `
-            <h2>Você já tem uma viagem favortia</h2>
+            <h2>Você já tem uma viagem favorita</h2>
             <p>Tem certeza que quer trocar?</p>
 
             <div class="div_button">
@@ -118,7 +125,27 @@ function exibirCaixaModal(viagem, idUsuario) {
 var verificador = 0
 function ModalAviso(rank, verificador) {
     if (verificador == 1) {
-        alert('Verificador correto')
+        if(rank){
+            caixa_modal.innerHTML = `
+            <h2>Que legal!</h2>
+            <p>Você escolheu umas das três viagens <b>mais</b> favoritadas do site. <br>
+            Parece que muita gente recomenda viajar para <b>${viagemUsuario}</b>.</p>
+
+            <div class="div_button">
+                <button class="btnAceitar" onclick='Modal.close()'>Uaaau, gostei!</button>
+            </div>
+        `
+        } else{
+            caixa_modal.innerHTML = `
+            <h2>Bacana</h2>
+            <p>Você escolheu umas das três viagens <b>menos</b> populares do site. <br>
+            Com certeza <b>${viagemUsuario}</b> é um bom destino, mas não é o preferido dos turista.</p>
+
+            <div class="div_button">
+                <button class="btnCancelar" onclick='Modal.close()'>Poxa, entendi!</button>
+            </div>
+        `
+        }
     }
 }
 
@@ -207,10 +234,7 @@ function trocarFavorito(viagem, idUsuario) {
 
         console.log("resposta: ", resposta);
 
-
         if (resposta.ok) {
-
-            alert('Entrando no respota OK')
 
             cardErro.style.display = "block";
 

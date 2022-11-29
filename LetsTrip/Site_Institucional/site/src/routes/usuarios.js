@@ -15,6 +15,9 @@ router.get("/listar", function (req, res) {
 router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 });
+router.post("/cadastrarComentario", function (req, res) {
+    usuarioController.cadastrarComentario(req, res);
+});
 router.post("/trocarFavorito", function (req, res) {
     usuarioController.trocarFavorito(req, res);
 });

@@ -11,7 +11,7 @@
     <script src="./js/funcoes.js"></script>
 </head>
 
-<body>
+<body id="pag_processos" onload="dimensaoTela()">
     <header>
         <div class="container">
             <div class="box-header">
@@ -30,27 +30,30 @@
     </header>
 
     <main>
+        <div class="dest-banner">
+            <h1 class="escolha-dest-grafico" style="margin-top: 30px;">Gráficos com os votos dos destinos</h1>
+        </div>
+
         <div id='banner_chart' class="banner_grafico">
             <canvas id="myChart"></canvas>
         </div>
 
-        <div>
-            <h1 onclick="atualizarGrafico()">Atualizar Grafico</h1>
+        <div class="dest-banner">
+            <h1 class="escolha-dest-grafico">Escolha seu destino favorito</h1>
         </div>
 
         <div id="quadro_viagem" class="banner-slides caixa"></div>
 
-        <div id="banner_modal"></div>
+        <div id="banner_modal" style="margin-bottom: 50px;"></div>
 
-        <div>
-            <h1>Testando</h1>
-        </div>
+        <div id="modal_aviso"></div>
+        
+        <footer class="banner_footer">
+            <div>Let's Trip© - <a href="./votacao.html">Avalie nosso site <u>aqui</u></a></div>
+        </footer>
     </main>
 </body>
 
-    <footer class="banner_footer">
-        <div>Let's Trip© - <a href="./votacao.html">Avalie nosso site <u>aqui</u></a></div>
-    </footer>
 
 </html>
 
