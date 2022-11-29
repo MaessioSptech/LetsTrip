@@ -240,6 +240,23 @@ main {
 .div-conhecer img{
     margin-top: 30px;
 }
+.banner-aleatorio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: auto;
+    background-color: #fff;
+    width: 1600px;
+    margin-top: 10vh;
+    padding-top: 30px;
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+}
+.div-aleatorio{
+    margin: 0 50px;
+}
 .div-grafico{
     width: 50%;
 }
@@ -450,7 +467,25 @@ button {
     margin-top: 10px;
     padding: 5px 30px;
 }
-
+.btnAleatorio{
+    border: 3px solid #ff8a04;
+    color: black;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 25px;
+}
+.btnAleatorio:hover{
+    background-color: #ff8a04;
+    color: white;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
 /* Grafico */
 .banner_grafico {
     display: flex;

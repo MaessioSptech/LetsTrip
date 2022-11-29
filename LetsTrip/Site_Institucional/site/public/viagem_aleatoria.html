@@ -1,36 +1,124 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Let's Trip</title>
+
+    <script src="./js/funcoes.js"></script>
+
+    <link rel="shortcut icon" href="./imagens/favicon.png" />
     <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
     <header>
         <div class="container">
             <div class="box-header">
-            <div>
-                <h1><a href="./index.html"><img src="./imagens/Let's Trip.png" alt="" style="width: 200px;"></a></h1>
-            </div>
-            <div class="navbar">
-                <ul>
-                    <li class="agora"><a href="./viagem_aleatoria.html">Viagem Aleatória</a></li>
-                    <li><a href="./login.html">Login</a></li>
-                    <li><a href="./cadastro.html">Cadastre-se</a></li>
-                </ul>
-            </div>
+                <div>
+                    <h1><a href="./index.html"><img src="./imagens/Let's Trip.png" alt="" style="width: 200px;"></a>
+                    </h1>
+                </div>
+                <div class="navbar">
+                    <ul>
+                        <li class="agora"><a href="./viagem_aleatoria.html">Viagem Aleatória</a></li>
+                        <li><a href="./login.html">Login</a></li>
+                        <li><a href="./cadastro.html">Cadastre-se</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
-    
-    <main>
 
+    <main>
+        <div class=" banner-aleatorio">
+            <div class="div-aleatorio">
+                <h1>Você gosta de desafios?<br>
+                    Aberte o botão "Rumo ao desconhecido" e descubra seu próximo destino!</h1>
+                <p style="font-size: 25px;">Mas fique ligado, pois voce só poderá apertar uma vez o botão. A ideia é que
+                    você enfrente o desafio. <br>
+                    Boa Sorte!
+                </p>
+                <button id="btnDesconhecido" class="btnAleatorio" style="font-size: 20px;" onclick="exibirAleatorio()">Rumo ao desconhecido</button>
+                <img src="./imagens/Sem nome (1500 × 300 px).png" alt="">
+            </div>
+        </div>
+        <div id="result_aleatorio">
+            
+        </div>
     </main>
 
     <footer class="banner_footer">
         <div>Let's Trip© - <a href="./votacao.html">Avalie nosso site <u>aqui</u></a></div>
     </footer>
 </body>
+
 </html>
+
+<script>
+    var tentativas = 0
+    function exibirAleatorio() {
+        tentativas++;
+        var numero = Math.floor(Math.random() * list_viagem.length);
+
+        var viagem = list_viagem[numero].nome;
+        var descricao = list_viagem[numero].descricao;
+        var imagem = list_viagem[numero].img;
+
+
+        result_aleatorio.innerHTML = `
+        <div class="modal-overlay active">
+                <div class="modal">
+                    <div  class='quadro_desc'>
+                        <div> 
+                            <img src='${imagem}' style="width: 800px; height: 600px;">
+                        </div>
+
+                        <div id='modalBanner'>
+                            <h2>${viagem}</h2>
+                            <p style="width: 800px; margin: 25px 0"'> ${descricao} </p>
+                        </div>
+                        <div class="div_button">
+                                <button id="ipt_desafio" class="btnAceitar" onclick="resultDesafio(true, '${viagem}', '${imagem}')">Aceitar Desafio!</button>
+                                <button id="ipt_desafio" class="btnCancelar" onclick="Modal.close(),resultDesafio(false, '${viagem}', '${imagem}')">Recusar Desafio!</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        `
+        
+    };
+
+    function resultDesafio(resultDesafio, viagem, imagem){
+        Modal.close()
+        if(resultDesafio && tentativas <= 1){
+            result_aleatorio.innerHTML = `
+            <div class="modal-overlay active">
+                <div class="modal">
+                    <div  class='quadro_desc'>
+                        <div> 
+                            <img src='${imagem}' style="width: 800px; height: 600px;">
+                        </div>
+
+                        <div id='modalBanner'>
+                            <h2>${viagem}</h2>
+                            <p style="width: 800px; margin: 25px 0"'> Parabens por aceitar o desafio! <br> Como presente, você ganhou a chance de jogar mais uma vez. </p>
+                        </div>
+                        <div class="div_button">
+                                <button id="ipt_desafio" class="btnAceitar" onclick='Modal.close()'>Aceitar Recompensa</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            `
+        } else{
+            document.getElementById("btnDesconhecido")
+                .disabled = "true";
+
+            var botaoDesconhecido = document.getElementById("btnDesconhecido");
+            botaoDesconhecido.classList.remove("btnAleatorio");
+        }
+    }
+</script>
