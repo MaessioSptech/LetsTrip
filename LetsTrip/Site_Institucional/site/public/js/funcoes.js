@@ -1,8 +1,8 @@
 // footer
-function dimensaoTela(){
+function dimensaoTela() {
     var heightTela = window.innerHeight;
 
-    document.getElementById('pag_processos').style.minHeight = heightTela+'px';
+    document.getElementById('pag_processos').style.minHeight = heightTela + 'px';
 }
 
 // sessão
@@ -123,9 +123,32 @@ function exibirCaixaModal(viagem, idUsuario) {
         `
 }
 var verificador = 0
-function ModalAviso(rank, verificador) {
+function ModalAviso(rank, verificador, viagemUsuario) {
+
+    for (var i = 0; i < list_viagem.length; i++) {
+        if (list_viagem[i].nome == viagemUsuario) {
+            var src_img = list_viagem[i].img
+        }
+    };
+
     if (verificador == 1) {
-        if(rank){
+        if (rank) {
+            banner_modal.innerHTML = `
+                <div class="modal-overlay active">
+                    <div class="modal">
+                        <div  class='quadro_desc'>
+                            <div> 
+                                <img src='${src_img}' style="width: 800px; height: 600px;">
+                            </div>
+
+                            <div id='modalBanner'>
+                                <h2>${viagemUsuario}</h2>
+                            </div>
+                                <div id="caixa_modal"></div>
+                        </div>
+                    </div>
+                </div>
+                `
             caixa_modal.innerHTML = `
             <h2>Que legal!</h2>
             <p>Você escolheu umas das três viagens <b>mais</b> favoritadas do site. <br>
@@ -135,7 +158,23 @@ function ModalAviso(rank, verificador) {
                 <button class="btnAceitar" onclick='Modal.close()'>Uaaau, gostei!</button>
             </div>
         `
-        } else{
+        } else {
+            banner_modal.innerHTML = `
+                <div class="modal-overlay active">
+                    <div class="modal">
+                        <div  class='quadro_desc'>
+                            <div> 
+                                <img src='${src_img}' style="width: 800px; height: 600px;">
+                            </div>
+
+                            <div id='modalBanner'>
+                                <h2>${viagemUsuario}</h2>
+                            </div>
+                                <div id="caixa_modal"></div>
+                        </div>
+                    </div>
+                </div>
+                `
             caixa_modal.innerHTML = `
             <h2>Bacana</h2>
             <p>Você escolheu umas das três viagens <b>menos</b> populares do site. <br>
@@ -320,7 +359,7 @@ function plotarGrafico(resposta, list_viagem) {
     console.log('iniciando plotagem do gráfico...');
 
     // Criando estrutura para plotar gráfico - labels
-    let labels = [`Águas de Lindoia`, `Águas de São Pedro`, `Campos do Jordão`, `Extrema`, `Holambra`, `Ilha bela`, `Joanópolis`, `Parati`, `São Roque`, `Serra Negra`];
+    let labels = [`Águas de Lindóia`, `Águas de São Pedro`, `Campos do Jordão`, `Extrema`, `Holambra`, `Ilha bela`, `Joanópolis`, `Paraty`, `São Roque`, `Serra Negra`];
 
     // Criando estrutura para plotar gráfico - dados
     let dados = {
@@ -476,9 +515,9 @@ function atualizarGrafico(dados, myChart) {
                     rank = true // Nos 3 MAIS votados
                 }
 
-                
-                ModalAviso(rank, verificador);
-                
+
+                ModalAviso(rank, verificador, viagemUsuario);
+
                 verificador = 0;
 
                 myChart.update();
