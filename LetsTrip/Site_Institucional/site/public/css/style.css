@@ -25,6 +25,7 @@ body {
     background-color: #1a5c0a;
 }
 
+
 /* FINAL DA ESTRUTA PRINCIPAL DO SITE ---------------*/
 
 /* IMAGEM DO BACKGROUND ---------------*/
@@ -296,6 +297,19 @@ main {
     flex-flow: row nowrap;
     padding-top: 30px;
     overflow-x: auto;
+}
+.caixa::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+.caixa::-webkit-scrollbar-track {
+background: #ff8a04;        /* color of the tracking area */
+}
+
+.caixa::-webkit-scrollbar-thumb {
+background-color: #ffffff;    /* color of the scroll thumb */
+border-radius: 10px;       /* roundness of the scroll thumb */
+border: 3px solid #ff8a04;  /* creates padding around scroll thumb */
 }
 
 .caixa img {
