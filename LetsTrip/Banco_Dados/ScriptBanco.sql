@@ -34,8 +34,9 @@ INSERT INTO viagem (nome_viagem) VALUES
     ('Águas de São Pedro'),
     ('Parati'),
     ('Extrema'),
-    ('Águas de Lindoia'),
+    ('Águas de Lindóia'),
     ('Serra Negra');
+    
 
 INSERT INTO usuario (nome, email, senha) VALUES
 	('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
@@ -84,7 +85,13 @@ INSERT INTO comentarioSite VALUES
       (14 , 2, 'sed quia consequuntur m', 14),
       (15 , 1, 'laboriosam, nisi ut a', 15);
 
+update usuario set fkViagem=5 where id=1;
 
 SELECT * FROM usuario;
 SELECT * FROM comentarioSite;
 SELECT * FROM viagem;
+
+SELECT v.nome_viagem, count(u.fkViagem) AS qtd_viagem
+                FROM usuario u JOIN viagem v ON u.fkViagem = v.id 
+                    WHERE u.fkViagem IS NOT NULL 
+                        GROUP BY u.fkViagem order by v.nome_viagem;
