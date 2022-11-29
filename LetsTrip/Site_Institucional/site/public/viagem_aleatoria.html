@@ -33,16 +33,16 @@
     </header>
 
     <main>
-        <div class=" banner-aleatorio">
+        <div class="banner-aleatorio">
             <div class="div-aleatorio">
-                <h1>Você gosta de desafios?<br>
+                <h1 style="font-size: 25px">Você gosta de desafios?<br>
                     Aberte o botão "Rumo ao desconhecido" e descubra seu próximo destino!</h1>
-                <p style="font-size: 25px;">Mas fique ligado, pois voce só poderá apertar uma vez o botão. A ideia é que
+                <p style="font-size: 20px;">Mas fique ligado, pois voce só poderá apertar uma vez o botão. A ideia é que
                     você enfrente o desafio. <br>
                     Boa Sorte!
                 </p>
                 <button id="btnDesconhecido" class="btnAleatorio" style="font-size: 20px;" onclick="exibirAleatorio()">Rumo ao desconhecido</button>
-                <img src="./imagens/Sem nome (1500 × 300 px).png" alt="">
+                <img src="./imagens/Sem nome (1500 × 300 px).png" style="width: 100%;">
             </div>
         </div>
         <div id="result_aleatorio">
@@ -71,19 +71,20 @@
         result_aleatorio.innerHTML = `
         <div class="modal-overlay active">
                 <div class="modal">
-                    <div  class='quadro_desc'>
+                    <div class='quadro_desc'>
                         <div> 
-                            <img src='${imagem}' style="width: 800px; height: 600px;">
+                            <img src='${imagem}'>
                         </div>
 
-                        <div id='modalBanner'>
+                        <div id='modalBanner' style="width: 100%; height: 100%;">
                             <h2>${viagem}</h2>
-                            <p style="width: 800px; margin: 25px 0"'> ${descricao} </p>
-                        </div>
-                        <div class="div_button">
+                            <p style="100%; margin: 25px 0; font-size: 19px"> ${descricao} </p>
+                            <div class="div_button">
                                 <button id="ipt_desafio" class="btnAceitar" onclick="resultDesafio(true, '${viagem}', '${imagem}')">Aceitar Desafio!</button>
                                 <button id="ipt_desafio" class="btnCancelar" onclick="Modal.close(),resultDesafio(false, '${viagem}', '${imagem}')">Recusar Desafio!</button>
                             </div>
+                        </div>
+                            <div id="caixa_modal"></div>
                     </div>
                 </div>
             </div>
@@ -99,16 +100,16 @@
                 <div class="modal">
                     <div  class='quadro_desc'>
                         <div> 
-                            <img src='${imagem}' style="width: 800px; height: 600px;">
+                            <img src='${imagem}'>
                         </div>
 
-                        <div id='modalBanner'>
+                        <div id='modalBanner' style="width: 100%; height: 100%;">
                             <h2>${viagem}</h2>
-                            <p style="width: 800px; margin: 25px 0"'> Parabens por aceitar o desafio! <br> Como presente, você ganhou a chance de jogar mais uma vez. </p>
-                        </div>
-                        <div class="div_button">
+                            <p style="100%; margin: 25px 0; font-size: 19px"> Parabens por aceitar o desafio! <br> Como presente, você ganhou a chance de jogar mais uma vez. </p>
+                            <div class="div_button">
                                 <button id="ipt_desafio" class="btnAceitar" onclick='Modal.close()'>Aceitar Recompensa</button>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>

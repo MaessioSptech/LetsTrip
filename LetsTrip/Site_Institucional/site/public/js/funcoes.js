@@ -91,14 +91,14 @@ function exibirModal(viagem, imagem, descricao) {
     banner_modal.innerHTML = `
             <div class="modal-overlay active">
                 <div class="modal">
-                    <div  class='quadro_desc'>
+                    <div class='quadro_desc'>
                         <div> 
-                            <img src='${imagem}' style="width: 800px; height: 600px;">
+                            <img src='${imagem}'>
                         </div>
 
-                        <div id='modalBanner'>
+                        <div id='modalBanner' style="width: 100%; height: 100%;">
                             <h2>${viagem}</h2>
-                            <p style="width: 800px; margin: 25px 0"'> ${descricao} </p>
+                            <p style="100%; margin: 25px 0; font-size: 19px"> ${descricao} </p>
                             <div class="div_button">
                                 <button class="btnAceitar" onclick="verificarUser('${viagem}')">Favoritar</button><br>
                                 <button class="btnCancelar" onclick='Modal.close()'>Cancelar</button>
@@ -138,7 +138,7 @@ function ModalAviso(rank, verificador, viagemUsuario) {
                     <div class="modal">
                         <div  class='quadro_desc'>
                             <div> 
-                                <img src='${src_img}' style="width: 800px; height: 600px;">
+                                <img src='${src_img}'>
                             </div>
 
                             <div id='modalBanner'>
@@ -164,7 +164,7 @@ function ModalAviso(rank, verificador, viagemUsuario) {
                     <div class="modal">
                         <div  class='quadro_desc'>
                             <div> 
-                                <img src='${src_img}' style="width: 800px; height: 600px;">
+                                <img src='${src_img}'>
                             </div>
 
                             <div id='modalBanner'>
