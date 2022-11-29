@@ -138,7 +138,7 @@ function ModalAviso(rank, verificador, viagemUsuario) {
     };
 
     if (verificador == 1) {
-        if (rank == false) {
+        if (rank) {
             banner_modal.innerHTML = `
                 <div class="modal-overlay active">
                     <div class="modal">
@@ -495,10 +495,11 @@ function atualizarGrafico(dados, myChart) {
 
                 console.log('LISTA DOS RANKINGS - ORDENADOS')
                 console.log(list_ranking)
+                var index = 0
 
                 for (var j = 0; j < list_ranking.length; j++) {
                     if (list_ranking[j].nome == viagemUsuario) {
-                        var index = j
+                        index = j
                     }
                 }
 
@@ -506,7 +507,7 @@ function atualizarGrafico(dados, myChart) {
                 console.log(viagemUsuario)
 
                 console.log('Index dessa viagem na lista')
-                console.log(index + 1)
+                console.log(index)
                 if (index <= 2) {
                     rank = false // Nos 3 MENOS votados
                 } else if (index > list_viagem.length - 4) {
