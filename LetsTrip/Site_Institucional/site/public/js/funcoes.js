@@ -117,7 +117,7 @@ function exibirCaixaModal(viagem, idUsuario) {
 
                 <div id='modalBanner' style="width: 100%; height: 100%;">
                     <h2>Você já tem uma viagem favorita</h2>
-                    <p>Tem certeza que quer trocar?</p>
+                    <p style="font-size: 19px">Tem certeza que quer trocar?</p>
             
                     <div class="div_button">
                         <button class="btnAceitar" onclick="trocarFavorito('${viagem}', '${idUsuario}')">Sim, tenho certeza!</button>
@@ -153,7 +153,7 @@ function ModalAviso(rank, verificador, viagemUsuario) {
                 `
             caixa_modal.innerHTML = `
             <h2>Que legal!</h2>
-            <p style="margin-left: 30px">Você escolheu umas das três viagens <b>mais</b> favoritadas do site. <br>
+            <p style="margin-left: 30px; font-size: 19px">Você escolheu umas das três viagens <b>mais</b> favoritadas do site. <br>
             Parece que muita gente recomenda viajar para <b>${viagemUsuario}</b>.</p>
 
             <div class="div_button">
@@ -175,7 +175,7 @@ function ModalAviso(rank, verificador, viagemUsuario) {
                 `
             caixa_modal.innerHTML = `
             <h2>Bacana</h2>
-            <p style="margin-left: 30px">Você escolheu umas das três viagens <b>menos</b> populares do site. <br>
+            <p style="margin-left: 30px; font-size: 19px">Você escolheu umas das três viagens <b>menos</b> populares do site. <br>
             Com certeza <b>${viagemUsuario}</b> é um bom destino, mas não é o preferido dos turista.</p>
 
             <div class="div_button">

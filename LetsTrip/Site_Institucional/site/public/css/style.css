@@ -22,7 +22,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #1a5c0a;
+    background-image: url(../imagens/background.png);
 }
 
 
@@ -271,6 +271,7 @@ main {
     text-align: center;
 }
 .escolha-dest{
+    margin-top: -200px;
     padding: 25px 10px;
     background-color: #ff8a04;
     color: white;

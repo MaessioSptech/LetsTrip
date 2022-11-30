@@ -1,10 +1,15 @@
+
+drop database letstrip;
+
 CREATE DATABASE letstrip;
 USE letstrip;
+
 
 CREATE TABLE viagem(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nome_viagem VARCHAR(20)
 );
+
 
 CREATE TABLE usuario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -15,17 +20,15 @@ CREATE TABLE usuario (
 	FOREIGN key (fkViagem) REFERENCES viagem(id)
 );
 
+
 CREATE TABLE comentarioSite (
-<<<<<<< HEAD
    id INT auto_increment,
-=======
-   id INT,
->>>>>>> c48672c1c9ab6b7edefcd8cad67e6f22f28cd76c
    comentario VARCHAR(150),
    fkUsuario INT,
    FOREIGN KEY (fkUsuario) REFERENCES usuario(id),
    PRIMARY KEY (id, fkUsuario)
 );
+
 
 INSERT INTO viagem (nome_viagem) VALUES
 	('Holambra'),
@@ -38,57 +41,6 @@ INSERT INTO viagem (nome_viagem) VALUES
     ('Extrema'),
     ('Águas de Lindóia'),
     ('Serra Negra');
-    
-<<<<<<< HEAD
-
-INSERT INTO usuario (nome, email, senha) VALUES
-	('Maessio Sousa', 'maessiosousa@sptech.com', '12345678'),
-    ('Bada', 'bada@sptech.com', '12345678'),
-    ('Oseln', 'oseln@sptech.com', '12345678'),
-    ('Romul', 'romul@sptech.com', '12345678'),
-    ('Zekiwu', 'zekiwu@sptech.com', '12345678'),
-    ('Podil', 'podil@sptech.com', '12345678'),
-    ('Siorifu', 'siorifu@sptech.com', '12345678'),
-    ('Picyoce', 'picyoce@sptech.com', '12345678'),
-    ('Cere', 'cere@sptech.com', '12345678'),
-    ('Pasul', 'pasul@sptech.com', '12345678'),
-	('Arcoa', 'arcoa@sptech.com', '12345678'),
-    ('Zuywe', 'zuywe@sptech.com', '12345678'),
-    ('Fauno', 'fauno@sptech.com', '12345678'),
-    ('Vabro', 'vabro@sptech.com', '12345678'),
-    ('Bedoy', 'bedoy@sptech.com', '12345678'),
-    ('Suysi', 'suysi@sptech.com', '12345678'),
-    ('Wuoga', 'wuoga@sptech.com', '12345678'),
-    ('Cyeme', 'Cyeme@sptech.com', '12345678'),
-    ('Ciako', 'Ciako@sptech.com', '12345678'),
-    ('Xiucu', 'Xiucu@sptech.com', '12345678'),
-    ('Gahoil', 'Gahoil@sptech.com', '12345678'),
-    ('Sawoba', 'Sawoba@sptech.com', '12345678'),
-    ('Hemoy', 'Hemoy@sptech.com', '12345678'),
-    ('Keohu', 'Keohu@sptech.com', '12345678'),
-    ('Fuvyo', 'fuvyo@sptech.com', '12345678');
-
-INSERT INTO comentarioSite (comentario, fkUsuario) VALUES 
-	  ('Site incrível', 1),
-      ('n voluptate velit esse cillum ', 2),
-      ('at nulla pariat', 3),
-      ('Excepteur sint occaec', 4),
-      ('dolor sit amet, ', 5),
-      (' do eiusmod tempor incidid', 6),
-      ('lore magna aliqua. Ut e', 7),
-      ('sed do eiusmod tempor i', 8),
-      ('magni dolores eos qui r', 9),
-      ('trum exercitatione', 10),
-      ('nisi ut aliquid ex ea commodi conseq', 11),
-      ('iure reprehenderit qui in ', 12),
-      ('inventore veritatis et qu', 13),
-      ('sed quia consequuntur m', 14),
-      ('laboriosam, nisi ut a', 15);
-
-SELECT * FROM usuario;
-SELECT * FROM comentarioSite;
-SELECT * FROM viagem order by nome_viagem;
-=======
     
 
 INSERT INTO usuario (nome, email, senha, fkViagem) VALUES
@@ -117,10 +69,25 @@ INSERT INTO usuario (nome, email, senha, fkViagem) VALUES
     ('Sawoba', 'Sawoba@sptech.com', '12345678', 6),
     ('Hemoy', 'Hemoy@sptech.com', '12345678', 6),
     ('Keohu', 'Keohu@sptech.com', '12345678', 6),
-    ('Fuvyo', 'fuvyo@sptech.com', '12345678', 2);
+    ('Fuvyo', 'fuvyo@sptech.com', '12345678', 2),
+    ('Intye', 'intye@sptech.com', '12345678', 3),
+    ('Neawuydu', 'neawuydu@sptech.com', '12345678', 1),
+    ('Kyesu', 'Kyesu@sptech.com', '12345678', 9),
+	('Hitan', 'Hitan@sptech.com', '12345678', 7),
+    ('Nuvos', 'Nuvos@sptech.com', '12345678', 2),
+    ('Foyus', 'Foyus@sptech.com', '12345678', 2),
+    ('Gana', 'Gana@sptech.com', '12345678', 6),
+    ('Cayel', 'Cayel@sptech.com', '12345678', 9),
+    ('Vofua', 'Vofua@sptech.com', '12345678', 7),
+    ('Xutey', 'Xutey@sptech.com', '12345678', 6),
+    ('Padoefi', 'Padoefi@sptech.com', '12345678', 2),
+    ('Figie', 'Figie@sptech.com', '12345678', 9),
+	('Wiobi', 'Wiobi@sptech.com', '12345678', 7),
+    ('Lesia', 'Lesia@sptech.com', '12345678', 2),
+    ('Vuewu', 'Vuewu@sptech.com', '12345678', 9),
+    ('Xairr', 'Xairr@sptech.com', '12345678', 7),
+    ('Heoss', 'Heoss@sptech.com', '12345678', 6);
     
-    
-
 
 INSERT INTO comentarioSite VALUES 
 	  (1 , 'Site incrível', 1),
@@ -139,18 +106,11 @@ INSERT INTO comentarioSite VALUES
       (14, 'sed quia consequuntur m', 14),
       (15, 'laboriosam, nisi ut a', 15);
 
-update usuario set fkViagem=5 where id=1;
-
 SELECT * FROM usuario;
 SELECT * FROM comentarioSite;
 SELECT * FROM viagem;
->>>>>>> c48672c1c9ab6b7edefcd8cad67e6f22f28cd76c
 
 SELECT v.nome_viagem, count(u.fkViagem) AS qtd_viagem
                 FROM usuario u JOIN viagem v ON u.fkViagem = v.id 
                     WHERE u.fkViagem IS NOT NULL 
-<<<<<<< HEAD
                         GROUP BY u.fkViagem ORDER BY v.nome_viagem;
-=======
-                        GROUP BY u.fkViagem order by v.nome_viagem;
->>>>>>> c48672c1c9ab6b7edefcd8cad67e6f22f28cd76c
